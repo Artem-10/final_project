@@ -1,0 +1,29 @@
+name: Docker Build and Push
+
+on:
+  push:
+    branches: [ "main" ]
+
+jobs:
+  build-and-push:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Login to Docker Hub
+        uses: actions/login-actions@v2
+        with:
+          username: ${{ secrets.DOCKERHUB_USERNAME }}
+          password: ${{ secrets.DOCKERHUB_TOKEN }}
+
+      - name: Build and Push image
+        uses: docker/build-push-action@v4
+        with:
+          context: ./app
+          push: true
+
+          tags: |
+            ${{ secrets.DOCKERHUB_USERNAME }}/python-backend:latest
+            ${{ secrets.DOCKERHUB_USERNAME }}/python-backend:${{ github.sha }}
