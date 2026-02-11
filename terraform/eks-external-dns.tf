@@ -1,5 +1,4 @@
-# To enable ArgoCD use this documentation:
-# https://registry.terraform.io/modules/lablabs/eks-external-dns/aws/latest
+z
 
 module "eks-external-dns" {
   source                           = "lablabs/eks-external-dns/aws"

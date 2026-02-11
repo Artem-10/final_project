@@ -1,10 +1,23 @@
+terraform {
+  required_providers {
+    aws = {
+      source  = "hashicorp/aws"
+      version = "6.17.0"
+    }
+  }
+}
 resource "aws_eks_cluster" "danit" {
   name     = var.name
   role_arn = aws_iam_role.cluster.arn
 
   vpc_config {
-    security_group_ids = [aws_security_group.danit-cluster.id]
-    subnet_ids         = var.subnets_ids
+    security_group_ids      = [aws_security_group.danit-cluster.id]
+    subnet_ids              = var.subnets_ids
+    #блок доданий мною для забезпечення публічності
+    endpoint_private_access = true
+    endpoint_public_access  = true
+    public_access_cidrs     = ["0.0.0.0/0"]
+
   }
 
   depends_on = [
@@ -28,4 +41,15 @@ resource "aws_eks_addon" "coredns" {
   resolve_conflicts_on_create = "OVERWRITE"
 
   depends_on = [aws_eks_node_group.danit]
+}
+
+#Ці два блоки також дописані мною
+resource "aws_eks_addon" "vpc_cni" {
+  cluster_name  = var.name
+  addon_name    = "vpc-cni"
+}
+
+resource "aws_eks_addon" "kube_proxy" {
+  cluster_name  = var.name
+  addon_name    = "kube-proxy"
 }
