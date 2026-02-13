@@ -10,7 +10,7 @@ metadata:
 spec:
   ingressClassName: alb
   rules:
-    - host: devops10.test-danit.com
+    - host: www.devops10.test-danit.com
       http:
         paths:
           - path: /
