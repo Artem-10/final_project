@@ -51,9 +51,13 @@ resource "aws_eks_addon" "coredns" {
 resource "aws_eks_addon" "vpc_cni" {
   cluster_name  = var.name
   addon_name    = "vpc-cni"
+
+  depends_on = [aws_eks_cluster.danit]
 }
 
 resource "aws_eks_addon" "kube_proxy" {
   cluster_name  = var.name
   addon_name    = "kube-proxy"
+
+  depends_on = [aws_eks_cluster.danit]
 }

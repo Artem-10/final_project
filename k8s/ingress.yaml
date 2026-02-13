@@ -3,11 +3,21 @@ kind: Ingress
 metadata:
   name: python-backend-ingress
   annotations:
-    kubernetes.io/ingress.class: nginx
+    alb.ingress.kubernetes.io/scheme: internet-facing
+    alb.ingress.kubernetes.io/target-type: ip
+
+    alb.ingress.kubernetes.io/certificate-arn: arn:aws:acm:eu-central-1:626126209976:certificate/5eab9118-7451-4ec6-a9ac-2acfa7d4922b
+
+    alb.ingress.kubernetes.io/listen-ports: '[{"HTTP": 80}, {"HTTPS": 443}]'
+    alb.ingress.kubernetes.io/ssl-redirect: '443'
+
+    alb.ingress.kubernetes.io/healthcheck-path: /
+    alb.ingress.kubernetes.io/healthcheck-interval-seconds: '15'
 
 spec:
+  ingressClassName: alb
   rules:
-    - host: devops8.test-danit.com
+    - host: devops10.test-danit.com
       http:
         paths:
           - path: /
