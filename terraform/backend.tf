@@ -1,6 +1,6 @@
 terraform {
   backend "s3" {
-    bucket         = "danit-devops-tf-state"
+    bucket         = "terraform-state-danit10-devops"
     key            = "eks/terraform.tfstate"
     encrypt        = true
     dynamodb_table = "lock-tf-eks"
