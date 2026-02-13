@@ -4,6 +4,10 @@ terraform {
       source  = "hashicorp/aws"
       version = "6.17.0"
     }
+    helm = {
+      source = "hasicorp/aws"
+      version = "2.12.1"
+    }
   }
 }
 resource "aws_eks_cluster" "danit" {
