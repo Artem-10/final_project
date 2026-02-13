@@ -5,7 +5,7 @@ metadata:
   annotations:
     kubernetes.io/ingress.class: nginx
   
-    nginx.ingress.kubernetes.io/ssl-terminate-at-proxies: "true"
+    nginx.ingress.kubernetes.io/ssl-terminate-at-proxies: "false"
 
 spec:
   ingressClassName: alb
