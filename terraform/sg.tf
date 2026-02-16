@@ -1,7 +1,7 @@
 resource "aws_security_group" "danit-cluster" {
   name        = "${var.name}-eks-sg"
   description = "Cluster communication with worker nodes"
-  vpc_id = var.vpc_id
+  vpc_id = module.vpc.vpc_id
 
   egress {
     from_port   = 0
@@ -35,3 +35,22 @@ resource "aws_security_group_rule" "kubeedge-cluster-ingress-workstation-https" 
   type              = "ingress"
 }
 
+resource "aws_security_group_rule" "allow_node_mgmt" {
+  type              = "ingress"
+  from_port         = 10250
+  to_port           = 10250
+  protocol          = "tcp"
+  cidr_blocks       = ["0.0.0.0/0"]
+  security_group_id = aws_security_group.danit-cluster.id
+  description       = "Allow port-forwarding from API server to nodes"
+}
+
+resource "aws_security_group_rule" "allow_https_nodes" {
+  type              = "ingress"
+  from_port         = 443
+  to_port           = 443
+  protocol          = "tcp"
+  cidr_blocks       = ["0.0.0.0/0"]
+  security_group_id = aws_security_group.danit-cluster.id
+  description       = "Allow HTTPS traffic to nodes"
+}

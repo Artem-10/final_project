@@ -1,6 +1,6 @@
 # For cluster
 resource "aws_iam_role" "cluster" {
-  name = "${var.name}-eks-role"
+  name = "${var.name}-eks-role-artemJ"
 
   assume_role_policy = <<POLICY
 {
@@ -18,7 +18,7 @@ resource "aws_iam_role" "cluster" {
 POLICY
   tags = merge(
     var.tags,
-    { Name = "${var.name}-eks-role" }
+    { Name = "${var.name}-eks-role-artemJ" }
   )
 }
 
@@ -50,7 +50,7 @@ module "oidc-provider-data" {
 
 # For nodes
 resource "aws_iam_role" "danit-node" {
-  name = "${var.name}-eks-node"
+  name = "${var.name}-eks-node-artemJ"
 
   assume_role_policy = <<POLICY
 {
@@ -68,7 +68,7 @@ resource "aws_iam_role" "danit-node" {
 POLICY
   tags = merge(
     var.tags,
-    { Name = "${var.name}-eks-node-role" }
+    { Name = "${var.name}-eks-node-role-artemJ" }
   )
 }
 
@@ -77,7 +77,7 @@ POLICY
 #Як що помилка при створенні кластера про те що нема доступу до ListHostedZones й ListResourceRecordSets
 #Значит ви не авторизувались з MFA
 resource "aws_iam_policy" "secrets_policy" {
-  name        = "${var.name}-GetSecrets"
+  name        = "${var.name}-GetSecrets-artemJ"
   path        = "/"
   description = "Policy to read aws secrets"
 

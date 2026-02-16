@@ -1,7 +1,7 @@
 terraform {
   backend "s3" {
     bucket         = "terraform-state-danit10-devops"
-    key            = "eks/terraform.tfstate"
+    key            = "artemJ/terraform.tfstate"
     encrypt        = true
     dynamodb_table = "lock-tf-eks"
     # dynamo key LockID

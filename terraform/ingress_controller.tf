@@ -36,3 +36,15 @@ resource "helm_release" "nginx_ingress" {
     value = "http"
   }
 }
+
+data "kubernetes_service" "nginx_ingress" {
+  metadata {
+    name = "ingress-nginx-controller"
+    namespace = "kube-system"
+  }
+  depends_on = [helm_release.nginx_ingress]
+}
+
+data "aws_lb" "ingress_controller" {
+  name = try(split("-", split(".", data.kubernetes_service.nginx_ingress.status[0].load_balancer[0].ingress[0].hostname)[0])[0], "waiting")
+}

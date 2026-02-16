@@ -16,7 +16,7 @@ resource "aws_eks_cluster" "danit" {
 
   vpc_config {
     security_group_ids      = [aws_security_group.danit-cluster.id]
-    subnet_ids              = var.subnets_ids
+    subnet_ids              = module.vpc.private_subnets
     #блок доданий мною для забезпечення публічності
     endpoint_private_access = true
     endpoint_public_access  = true
