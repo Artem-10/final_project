@@ -2,8 +2,8 @@ variable "name" {
 }
 variable "vpc_id" {
 }
-variable "subnets_ids" {
-}
+#variable "subnets_ids" {
+#}
 variable "tags" {
 }
 variable "region" {

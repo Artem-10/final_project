@@ -17,7 +17,6 @@ resource "aws_eks_cluster" "danit" {
   vpc_config {
     security_group_ids      = [aws_security_group.danit-cluster.id]
     subnet_ids              = module.vpc.private_subnets
-    #блок доданий мною для забезпечення публічності
     endpoint_private_access = true
     endpoint_public_access  = true
     public_access_cidrs     = ["0.0.0.0/0"]
@@ -39,10 +38,10 @@ data "aws_eks_cluster_auth" "danit" {
 }
 
 resource "aws_eks_addon" "coredns" {
-  cluster_name                = var.name
+  cluster_name                = aws_eks_cluster.danit.name
   addon_name                  = "coredns"
   addon_version               = "v1.12.4-eksbuild.1"
-  resolve_conflicts_on_create = "OVERWRITE"
+  resolve_conflicts_on_update = "OVERWRITE"
 
   depends_on = [aws_eks_node_group.danit]
 }

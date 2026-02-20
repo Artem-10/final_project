@@ -30,9 +30,10 @@ resource "aws_route53_record" "app_dns" {
   zone_id = data.aws_route53_zone.zone.zone_id
   name = local.domain_name
   type = "A"
+  allow_overwrite = true
 
   alias {
-    name = try(data.kubernetes_service.nginx_ingress.status[0].load_balancer[0].ingress[0].hostname, "pending")
+    name = data.aws_lb.ingress_controller.dns_name
     zone_id = data.aws_lb.ingress_controller.zone_id
     evaluate_target_health = true
   }
