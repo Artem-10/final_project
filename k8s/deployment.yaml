@@ -18,7 +18,7 @@ spec:
       containers:
       - name: python-backend
         namespace: artemj-danit
-        image: aartemdevops10/python-backend:latesg
+        image: aartemdevops10/python-backend:936404525ac161c27a8dcc4ab979c15016206c91
         imagePullPolicy: Always
         ports:
         - containerPort: 8080
