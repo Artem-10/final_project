@@ -8,10 +8,7 @@ metadata:
 
     nginx.ingress.kubernetes.io/ssl-redirect: "true"
 spec:
-  tls:
-    - hosts:
-      - devops10.test-danit.com
-      secretName: python-app-tls
+  ingressClassName: nginx
   rules:
     - host: devops10.test-danit.com
       http:
