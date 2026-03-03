@@ -18,7 +18,7 @@ spec:
       containers:
       - name: python-backend
 
-        image: aartemdevops10/python-backend:latest
+        image: aartemdevops10/python-backend:c4203fac65878af4c23a085683d1684ad686882b
         imagePullPolicy: Always
         ports:
         - containerPort: 8080
