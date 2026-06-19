@@ -46,7 +46,7 @@ resource "aws_eks_addon" "coredns" {
   depends_on = [aws_eks_node_group.danit]
 }
 
-#Ці два блоки також дописані мною
+
 resource "aws_eks_addon" "vpc_cni" {
   cluster_name  = var.name
   addon_name    = "vpc-cni"
